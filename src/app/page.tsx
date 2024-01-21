@@ -1,5 +1,6 @@
 "use client";
 
+import { useReadClaimKey } from "@/hooks/readContract";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 
@@ -7,6 +8,9 @@ function App() {
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
+
+  const { data: claimedKeyData } = useReadClaimKey();
+  console.info({ claimedKeyData });
 
   return (
     <>
