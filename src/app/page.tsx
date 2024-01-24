@@ -7,6 +7,9 @@ import { useSignMessage } from "wagmi";
 import { claimKey } from "@/hooks/writeContract";
 import KeyItem from "@/components/keyItem";
 import { KeyItemModel } from "@/components/keyItem/type";
+import { Button } from "@/components/button";
+
+import { WalletIcon, ChevronRightIcon } from "@/components/icons";
 
 function App() {
   const account = useAccount();
@@ -43,6 +46,9 @@ function App() {
       <div>
         <h2>Account</h2>
 
+        <WalletIcon />
+        <ChevronRightIcon />
+
         <div>
           status: {account.status}
           <br />
@@ -54,22 +60,22 @@ function App() {
         </div>
 
         {account.status === "connected" && (
-          <button type="button" onClick={() => disconnect()}>
+          <Button type="button" onClick={() => disconnect()}>
             Disconnect
-          </button>
+          </Button>
         )}
       </div>
 
       <div>
-        <button
+        <Button
           onClick={() => connect({ connector: injected() })}
           type="button"
         >
           connect
-        </button>
+        </Button>
 
         <hr />
-        <button onClick={handleClickClaim}>Claim</button>
+        <Button onClick={handleClickClaim}>Claim</Button>
         <hr />
       </div>
 
