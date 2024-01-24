@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useReadTokenURI = (tokenURI?: string) => {
   return useQuery({
-    queryKey: ['tokenURI', tokenURI],
+    queryKey: ["tokenURI", tokenURI],
     queryFn: () => instance.get<ItemInfo>(tokenURI as string),
     select: (res) => {
       return {
@@ -14,5 +14,5 @@ export const useReadTokenURI = (tokenURI?: string) => {
       };
     },
     enabled: tokenURI !== undefined,
-  })
+  });
 };

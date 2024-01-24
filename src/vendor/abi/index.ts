@@ -1,40 +1,40 @@
 export const abi = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32",
-        "name": "signature",
-        "type": "bytes32"
-      }
+        internalType: "bytes32",
+        name: "signature",
+        type: "bytes32",
+      },
     ],
-    "name": "claimKey",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "claimKey",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "claimedKeys",
-    "outputs": [
+    inputs: [],
+    name: "claimedKeys",
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "string",
-            "name": "tokenURI",
-            "type": "string"
+            internalType: "string",
+            name: "tokenURI",
+            type: "string",
           },
           {
-            "internalType": "uint256",
-            "name": "claimedAt",
-            "type": "uint256"
-          }
+            internalType: "uint256",
+            name: "claimedAt",
+            type: "uint256",
+          },
         ],
-        "internalType": "struct TaskForNew.Key[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+        internalType: "struct TaskForNew.Key[]",
+        name: "",
+        type: "tuple[]",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+    stateMutability: "view",
+    type: "function",
+  },
 ] as const;

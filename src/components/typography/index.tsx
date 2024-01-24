@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Heading5 = styled.h5`
-  font-family: Quantico;
+  font-family: var(--font-quantico);
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -9,7 +9,7 @@ export const Heading5 = styled.h5`
   letter-spacing: 0.48px;
 `;
 export const Caption1 = styled.p`
-  font-family: Quantico;
+  font-family: var(--font-quantico);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -18,7 +18,7 @@ export const Caption1 = styled.p`
 `;
 export const Caption2 = styled.p`
   /* caption2 */
-  font-family: Quantico;
+  font-family: var(--font-quantico);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -26,7 +26,7 @@ export const Caption2 = styled.p`
   letter-spacing: 0.48px;
 `;
 export const ButtonLabel = styled.span`
-  font-family: Quantico;
+  font-family: var(--font-quantico);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

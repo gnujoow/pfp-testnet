@@ -2,9 +2,6 @@ import styled from "@emotion/styled";
 import { ButtonLabel } from "../typography";
 import { ButtonHTMLAttributes, FC } from "react";
 
-import DefaultBodySvg from "./default-body.svg";
-import LeftEdge from "./default-left.svg";
-import RightEdge from "./default-right.svg";
 import colors from "@/style/colors";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -141,6 +141,7 @@ const Section = styled.section`
 `;
 
 const SectionHeading = styled(Heading5)`
+  font-family: var(--font-quantico);
   margin-bottom: 66px;
 `;
 
