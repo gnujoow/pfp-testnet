@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { Caption1, Heading5 } from "@/components/typography";
 import StatusBar from "@/components/statusBar";
 import { Global, css } from "@emotion/react";
+import { instance } from "@/vendor/axios";
 
 function App() {
   const { address, isConnected } = useAccount();
@@ -21,19 +22,15 @@ function App() {
   const { signMessageAsync } = useSignMessage();
 
   const { data: claimedKeyData, refetch } = useReadClaimKey(address);
-  console.info({ claimedKeyData });
 
   const handleClickClaim = async () => {
     try {
       if (!address) return;
-      // sign message
-      const signData = await signMessageAsync({ message: "yeah" });
-      const truncatedHexString = signData.substr(2, 64);
-      const sign32byte = `0x${truncatedHexString}` as `0x${string}`;
 
-      console.info({ sign32byte });
-      // claim key
-      const data = await claimKey(sign32byte);
+      // please refer to /api/routes.ts
+      const res = await instance.post("/api", { address });
+      const { message } = res as any;
+      const data = await claimKey(message);
       console.info({ data });
 
       // refetch
