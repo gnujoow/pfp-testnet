@@ -1,4 +1,4 @@
-import { abi } from '@/abi';
+import { abi } from '@/vendor/abi';
 import { Address } from 'viem';
 import { useReadContract } from 'wagmi'
 
