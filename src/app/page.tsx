@@ -12,7 +12,7 @@ function App() {
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
 
-  const { data: claimedKeyData, refetch } = useReadClaimKey();
+  const { data: claimedKeyData, refetch } = useReadClaimKey(account.address);
   console.info({ claimedKeyData });
 
   const handleClickClaim = async () => {
