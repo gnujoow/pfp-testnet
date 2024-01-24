@@ -9,6 +9,8 @@ import KeyItem from "@/components/keyItem";
 import { KeyItemModel } from "@/components/keyItem/type";
 import { Button } from "@/components/button";
 
+import { WalletIcon, ChevronRightIcon } from "@/components/icons";
+
 function App() {
   const account = useAccount();
   const { connect, status, error } = useConnect();
@@ -43,6 +45,9 @@ function App() {
     <>
       <div>
         <h2>Account</h2>
+
+        <WalletIcon />
+        <ChevronRightIcon />
 
         <div>
           status: {account.status}
