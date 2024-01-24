@@ -9,14 +9,13 @@ import KeyItem from "@/components/keyItem";
 import { KeyItemModel } from "@/components/keyItem/type";
 import { Button } from "@/components/button";
 
-import { WalletIcon, ChevronRightIcon } from "@/components/icons";
 import styled from "@emotion/styled";
 import { Heading5 } from "@/components/typography";
+import StatusBar from "@/components/statusBar";
 
 function App() {
   const account = useAccount();
-  const { connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { connect } = useConnect();
   const { signMessageAsync } = useSignMessage();
 
   const { data: claimedKeyData, refetch } = useReadClaimKey(account.address);
@@ -45,26 +44,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <WalletIcon />
-        <ChevronRightIcon />
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-          <div>status :{status}</div>
-          <div>{error?.message}</div>
-        </div>
-
-        {account.status === "connected" && (
-          <Button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </Button>
-        )}
-      </div>
+      <StatusBar />
 
       <Section>
         <h2>Mint Keys, Build Identities, Get Rewards</h2>
