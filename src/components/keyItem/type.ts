@@ -1,6 +1,6 @@
 import { BlockNumber } from "viem";
 
-export interface KeyItem {
+export interface KeyItemModel {
   claimedAt: BlockNumber,
   tokenURI: string,
 }
