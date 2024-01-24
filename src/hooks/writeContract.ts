@@ -1,4 +1,4 @@
-import { abi } from '@/abi'
+import { abi } from '@/vendor/abi'
 import { config } from '@/wagmi'
 import { writeContract } from '@wagmi/core'
 

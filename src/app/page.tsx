@@ -5,6 +5,8 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { useSignMessage } from "wagmi";
 import { claimKey } from "@/hooks/writeContract";
+import KeyItem from "@/components/keyItem";
+import { KeyItemModel } from "@/components/keyItem/type";
 
 function App() {
   const account = useAccount();
@@ -74,10 +76,8 @@ function App() {
       <div>
         <h2>Claimed Key</h2>
         <div>
-          {claimedKeyData?.map((item) => (
-            <div key={item.claimedAt}>
-              <img src={item.tokenURI} alt="" />
-            </div>
+          {claimedKeyData?.map((item: KeyItemModel) => (
+            <KeyItem key={item.tokenURI} {...item} />
           ))}
         </div>
       </div>
