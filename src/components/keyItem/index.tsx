@@ -12,7 +12,22 @@ const KeyItem: FC<KeyItemProps> = ({ claimedAt, tokenURI }) => {
   }
 
   if (data) {
-    return <div>{claimedAt.toString()}</div>;
+    return (
+      <div>
+        {claimedAt.toString()}
+        <img src={data.image} alt="key" />
+        <div>{data.name}</div>
+        <div>{data.description}</div>
+        <div>{data.universe}</div>
+        <div>
+          {data.attributes.map((attr) => (
+            <div>
+              {attr.trait_type}: {attr.value}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
   return null;
 };
