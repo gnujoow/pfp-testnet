@@ -28,7 +28,6 @@ function App() {
       if (!address) return;
       // sign message
       const signData = await signMessageAsync({ message: "yeah" });
-      console.info({ signData });
       const truncatedHexString = signData.substr(2, 64);
       const sign32byte = `0x${truncatedHexString}` as `0x${string}`;
 
@@ -78,8 +77,8 @@ function App() {
 
         {isConnected && (
           <>
+            {/* claim */}
             <Section>
-              {/* claim */}
               <SectionHeading>Available Keys</SectionHeading>
               <ItemBox>
                 <img
@@ -99,8 +98,8 @@ function App() {
                 more Keys to be added
               </Caption1>
             </Section>
-            <Section>{/* claimed keys */}</Section>
 
+            {/* claimed section */}
             <Section>
               <SectionHeading>
                 Claimed Keys [{claimedKeyData?.length}]
