@@ -17,6 +17,7 @@ export const Button: FC<ButtonProps> = (props) => {
 };
 
 const Root = styled.button<ButtonProps>`
+  font-family: var(--font-quantico);
   cursor: pointer;
 
   background: 0;
