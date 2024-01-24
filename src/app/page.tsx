@@ -10,6 +10,8 @@ import { KeyItemModel } from "@/components/keyItem/type";
 import { Button } from "@/components/button";
 
 import { WalletIcon, ChevronRightIcon } from "@/components/icons";
+import styled from "@emotion/styled";
+import { Heading5 } from "@/components/typography";
 
 function App() {
   const account = useAccount();
@@ -44,8 +46,6 @@ function App() {
   return (
     <>
       <div>
-        <h2>Account</h2>
-
         <WalletIcon />
         <ChevronRightIcon />
 
@@ -66,29 +66,35 @@ function App() {
         )}
       </div>
 
-      <div>
+      <Section>
+        <h2>Mint Keys, Build Identities, Get Rewards</h2>
         <Button
           onClick={() => connect({ connector: injected() })}
           type="button"
         >
           connect
         </Button>
+      </Section>
 
-        <hr />
+      <Section>
+        {/* claim */}
+        <Heading5>Available Keys</Heading5>
         <Button onClick={handleClickClaim}>Claim</Button>
-        <hr />
-      </div>
+      </Section>
+      <Section>{/* claimed keys */}</Section>
 
-      <div>
-        <h2>Claimed Key</h2>
+      <Section>
+        <Heading5>Claimed Keys [{claimedKeyData?.length}]</Heading5>
         <div>
           {claimedKeyData?.map((item: KeyItemModel) => (
             <KeyItem key={item.tokenURI} {...item} />
           ))}
         </div>
-      </div>
+      </Section>
     </>
   );
 }
+
+const Section = styled.section``;
 
 export default App;
