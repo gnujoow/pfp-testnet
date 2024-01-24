@@ -13,7 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: FC<ButtonProps> = (props) => {
   return (
-    <Root>
+    <Root {...props}>
       <ButtonLabel>{props.children}</ButtonLabel>
     </Root>
   );
@@ -33,6 +33,8 @@ const Root = styled.button<ButtonProps>`
   position: relative;
   height: 50px;
   background-image: url("/default-body.svg");
+
+  ${(props) => props.fullWidth && "width: calc(100% - 16px);"}
 
   span {
     color: ${colors.primary};

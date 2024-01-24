@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @emotion/react */
 
 import { useReadClaimKey } from "@/hooks/readContract";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
@@ -9,20 +10,22 @@ import KeyItem from "@/components/keyItem";
 import { KeyItemModel } from "@/components/keyItem/type";
 import { Button } from "@/components/button";
 
-import { WalletIcon, ChevronRightIcon } from "@/components/icons";
+import styled from "@emotion/styled";
+import { Caption1, Heading5 } from "@/components/typography";
+import StatusBar from "@/components/statusBar";
+import { Global, css } from "@emotion/react";
 
 function App() {
-  const account = useAccount();
-  const { connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect();
   const { signMessageAsync } = useSignMessage();
 
-  const { data: claimedKeyData, refetch } = useReadClaimKey(account.address);
+  const { data: claimedKeyData, refetch } = useReadClaimKey(address);
   console.info({ claimedKeyData });
 
   const handleClickClaim = async () => {
     try {
-      if (!account.address) return;
+      if (!address) return;
       // sign message
       const signData = await signMessageAsync({ message: "yeah" });
       console.info({ signData });
@@ -41,54 +44,111 @@ function App() {
     }
   };
 
+  const handleClickConnect = () => {
+    connect({ connector: injected() });
+  };
+
   return (
     <>
-      <div>
-        <h2>Account</h2>
+      <Global
+        styles={css`
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6,
+          p {
+            margin: 0; /* or ‘0 0 1em’ if you’re so inclined */
+          }
+        `}
+      />
 
-        <WalletIcon />
-        <ChevronRightIcon />
+      <Container>
+        <StatusBar />
 
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-          <div>status :{status}</div>
-          <div>{error?.message}</div>
-        </div>
+        <Section>
+          <h2>Mint Keys, Build Identities, Get Rewards</h2>
+          {!isConnected && (
+            <Button onClick={handleClickConnect} type="button">
+              connect
+            </Button>
+          )}
+        </Section>
 
-        {account.status === "connected" && (
-          <Button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </Button>
+        {isConnected && (
+          <>
+            <Section>
+              {/* claim */}
+              <SectionHeading>Available Keys</SectionHeading>
+              <ItemBox>
+                <img
+                  src="https://cloudflare-ipfs.com/ipfs/QmTiZXCudt5FHkh8E7R2vzSYaBc2S8tfaXnZoatgjxyezU"
+                  alt=""
+                />
+                <Button fullWidth onClick={handleClickClaim}>
+                  Claim
+                </Button>
+              </ItemBox>
+
+              <Caption1
+                css={css`
+                  margin-top: 24px;
+                `}
+              >
+                more Keys to be added
+              </Caption1>
+            </Section>
+            <Section>{/* claimed keys */}</Section>
+
+            <Section>
+              <SectionHeading>
+                Claimed Keys [{claimedKeyData?.length}]
+              </SectionHeading>
+              <ItemGrid>
+                {claimedKeyData?.map((item: KeyItemModel) => (
+                  <KeyItem key={item.tokenURI} {...item} />
+                ))}
+              </ItemGrid>
+            </Section>
+          </>
         )}
-      </div>
-
-      <div>
-        <Button
-          onClick={() => connect({ connector: injected() })}
-          type="button"
-        >
-          connect
-        </Button>
-
-        <hr />
-        <Button onClick={handleClickClaim}>Claim</Button>
-        <hr />
-      </div>
-
-      <div>
-        <h2>Claimed Key</h2>
-        <div>
-          {claimedKeyData?.map((item: KeyItemModel) => (
-            <KeyItem key={item.tokenURI} {...item} />
-          ))}
-        </div>
-      </div>
+      </Container>
     </>
   );
 }
+
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 0 50px;
+`;
+
+const ItemBox = styled.div`
+  width: 260px;
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 10px;
+  }
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 60px;
+`;
+
+const SectionHeading = styled(Heading5)`
+  margin-bottom: 66px;
+`;
+
+const ItemGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+`;
 
 export default App;
